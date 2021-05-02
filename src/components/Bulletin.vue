@@ -8,7 +8,7 @@
             <b-card-text>
             <b-table striped dark hover :items="video.chapters" :fields="fields">
               <template #cell(name)="data">
-                <a href="#" v-on:click="play(data.index, $event)">{{ data.value }}</a>
+                <a href="#" v-on:click="play(data.index)">{{ data.value }}</a>
               </template>
               <template #cell()="data">
                 <a v-if="data.item.name.toLowerCase() == 'scripture' && data.field.key == 'info'" href="#" v-b-modal.scripture>{{ data.value }}</a>
@@ -58,10 +58,7 @@ export default {
     }
   },
   methods: {
-    play: function(i, e) {
-      e.preventDefault();
-      // console.log('play', i);
-      // console.log(this.video.chapters[i].ss);
+    play: function(i) {
       window.player.currentTime(this.video.chapters[i].ss)
     }
   },
