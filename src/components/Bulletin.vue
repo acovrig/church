@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Bulletin</h1>
-    <div>
+    <div id="bulletin">
       <b-card no-body>
         <b-tabs card>
           <b-tab title="Table" v-if="video.chapters.length > 0" active>
@@ -77,11 +77,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div#bulletin {
+  max-width: 1750px;
+  margin: 0px auto;
+}
 div#pdfOut {
   position: relative;
   display: block;
   width: 100%;
   margin: 0px auto;
+  max-height: 1130px;
 }
 div#pdfIn {
   padding-top: 70%;

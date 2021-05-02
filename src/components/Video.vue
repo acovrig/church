@@ -80,10 +80,10 @@ export default {
 div#videoOut {
   position: relative;
   display: block;
-  width: 100%;
-  max-width: 85%;
+  width: 85%;
   max-height: 80vh;
   margin: 0px auto;
+  max-width: 1750px;
 }
 div#videoIn {
   padding-top: 50%;
