@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+      <VideoIndex :lst="db" />
+    </b-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import VideoIndex from '@/components/VideoIndex.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    VideoIndex
+  },
+  data() {
+    return {
+      db: this.$store.state.db,
+    }
   }
 }
 </script>

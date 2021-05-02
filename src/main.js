@@ -3,6 +3,15 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import { BootstrapVue, IconsPlugin, DropdownPlugin, TablePlugin, LayoutPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue, IconsPlugin, DropdownPlugin, TablePlugin, LayoutPlugin)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 

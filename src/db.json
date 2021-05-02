@@ -1,0 +1,139 @@
+[
+    {
+        "date": "2021-05-01",
+        "kind": "ss",
+        "name": "Sabbath School",
+        "fn": "2021-05-01_ss.mp4",
+        "sub": "2021-05-01_ss.srt",
+        "chapters": []
+    },
+    {
+        "date": "2021-05-01",
+        "kind": "church",
+        "name": "Church",
+        "fn": "2021-05-01_church.mp4",
+        "sub": "2021-05-01_church.srt",
+        "pdf": "2021-05-01.pdf",
+        "scripture": "10 Ye are my witnesses, saith the LORD, and my servant whom I have chosen: that ye may know and believe me, and understand that I am he: before me there was no God formed, neither shall there be after me.\n11 I, even I, am the LORD; and beside me there is no saviour.\n12 I have declared, and have saved, and I have shewed, when there was no strange god among you: therefore ye are my witnesses, saith the LORD, that I am God",
+        "sprite": {
+            "interval": 48,
+            "url": "2021-05-01_church-sprite.jpg",
+            "width": 100,
+            "height": 56
+        },
+        "chapters": [
+            {
+                "name": "Song of Praise",
+                "who": "Dave & Marlene Colburn",
+                "info": "#539 - I Will Early Seek the Savior",
+                "ss": 0,
+                "t": 0
+            },
+            {
+                "name": "Standifer Gap Family Life",
+                "who": "Nate Perry",
+                "info": "",
+                "ss": 0,
+                "t": 223
+            },
+            {
+                "name": "Song of Praise",
+                "who": "Dave & Marlene Colburn",
+                "info": "#248 - O, How I Love Jesus",
+                "ss": 238,
+                "t": 376
+            },
+            {
+                "name": "Opening Hymn",
+                "who": "Dave & Marlene Colburn",
+                "info": "#223 Crown Him With Many Crowns",
+                "ss": 384,
+                "t": 584
+            },
+            {
+                "name": "Prayer Song",
+                "who": "Dave & Marlene Colburn",
+                "info": "#290 Turn Your Eyes Upon Jesus",
+                "ss": 593,
+                "t": 647
+            },
+            {
+                "name": "Morning Prayer",
+                "who": "Aiden Grant",
+                "info": "",
+                "ss": 652,
+                "t": 723
+            },
+            {
+                "name": "Ministry Appreciation",
+                "who": "Pastor Sitler",
+                "info": "Nate Perry",
+                "ss": 739,
+                "t": 909
+            },
+            {
+                "name": "Mission Feature",
+                "who": "Pastor Sitler",
+                "info": "Billy Saunders",
+                "ss": 910,
+                "t": 1066
+            },
+            {
+                "name": "Offering",
+                "who": "Nate Perry",
+                "info": "Our Church Budget",
+                "ss": 1079,
+                "t": 1208
+            },
+            {
+                "name": "Offertory",
+                "who": "",
+                "info": "",
+                "ss": 1222,
+                "t": 1429
+            },
+            {
+                "name": "Children's Story",
+                "who": "Nedra Krause",
+                "info": "",
+                "ss": 1442,
+                "t": 1956
+            },
+            {
+                "name": "Scripture",
+                "who": "Kevin Brickley",
+                "info": "Isaiah 43: 10-12",
+                "ss": 1963,
+                "t": 2028
+            },
+            {
+                "name": "Special Music",
+                "who": "Dave & Marlene Colburn",
+                "info": "",
+                "ss": 2124,
+                "t": 2352
+            },
+            {
+                "name": "Message",
+                "who": "Pastor Sitler",
+                "info": "\"Living: Tell What You Know, Live What You Believe...\"",
+                "ss": 2379,
+                "t": 4417
+            },
+            {
+                "name": "Closing Hymn",
+                "who": "Dave & Marlene Colburn",
+                "info": "#573 I'll Go Where You Want Me to Go",
+                "ss": 4439,
+                "t": 4744
+            },
+            {
+                "name": "Benediction Blessing",
+                "who": "Pastor Sitler",
+                "info": "",
+                "ss": 4745,
+                "t": 4770
+            }
+        ]
+    }
+]
