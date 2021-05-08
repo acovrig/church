@@ -1,4 +1,4 @@
-# church2
+# church
 
 ## Project setup
 ```
