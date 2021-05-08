@@ -40,6 +40,8 @@ export default {
   },
   methods: {
     chapters: function() {
+      if(this.video.chapters == null)
+        return null;
       let data = "WEBVTT\n\n";
       this.video.chapters.forEach(chapter => {
         let ss = chapter.ss == null ? 0 : chapter.ss;

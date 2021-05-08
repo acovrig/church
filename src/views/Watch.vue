@@ -1,7 +1,7 @@
 <template>
   <div class="watch">
     <Video :video="video" />
-    <Bulletin :video="video"  v-if="video.pdf != null || video.chapters.length > 0" />
+    <Bulletin :video="video" v-if="video.pdf != null || (video.chapters != null && video.chapters.length > 0)" />
   </div>
 </template>
 

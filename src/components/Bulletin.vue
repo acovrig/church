@@ -11,7 +11,7 @@
                 <a href="#" v-on:click="play(data.index)">{{ data.value }}</a>
               </template>
               <template #cell()="data">
-                <a v-if="data.item.name.toLowerCase() == 'scripture' && data.field.key == 'info'" href="#" v-b-modal.scripture>{{ data.value }}</a>
+                <a v-if="data.item.name != null && data.item.name.toLowerCase() == 'scripture' && data.field.key == 'info' && video.scripture != null" href="#" v-b-modal.scripture>{{ data.value }}</a>
                 <template v-else>
                   {{ data.value }}
                 </template>

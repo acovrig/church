@@ -4,15 +4,20 @@
         "kind": "ss",
         "name": "Sabbath School",
         "fn": "2021-05-01_ss.mp4",
-        "sub": "2021-05-01_ss.srt",
-        "chapters": []
+        "sub": "2021-05-01_ss.vtt",
+        "sprite": {
+            "interval": 13,
+            "url": "2021-05-01_ss-sprite.jpg",
+            "width": 100,
+            "height": 56
+        }
     },
     {
         "date": "2021-05-01",
         "kind": "church",
         "name": "Church",
         "fn": "2021-05-01_church.mp4",
-        "sub": "2021-05-01_church.srt",
+        "sub": "2021-05-01_church.vtt",
         "pdf": "2021-05-01.pdf",
         "scripture": "10 Ye are my witnesses, saith the LORD, and my servant whom I have chosen: that ye may know and believe me, and understand that I am he: before me there was no God formed, neither shall there be after me.\n11 I, even I, am the LORD; and beside me there is no saviour.\n12 I have declared, and have saved, and I have shewed, when there was no strange god among you: therefore ye are my witnesses, saith the LORD, that I am God",
         "sprite": {
@@ -133,6 +138,134 @@
                 "info": "",
                 "ss": 4745,
                 "t": 4770
+            }
+        ]
+    },
+    {
+        "date": "2021-05-08",
+        "kind": "ss",
+        "name": "Sabbath School",
+        "fn": "2021-05-08_ss.mp4",
+        "sub": "2021-05-08_ss.vtt",
+        "sprite": {
+            "interval": 21,
+            "url": "2021-05-08_ss-sprite.jpg",
+            "width": 100,
+            "height": 56
+        }
+    },
+    {
+        "date": "2021-05-08",
+        "kind": "church",
+        "name": "Church",
+        "fn": "2021-05-08_church.mp4",
+        "sub": "2021-05-08_church.vtt",
+        "pdf": "2021-05-08.pdf",
+        "scripture": "30 Charm is deceitful, and beauty is vain; but a woman who fears Yahweh, she shall be praised.<br><br>31 Give her of the fruit of her hands! Let her works praise her in the gates!",
+        "sprite": {
+            "interval": 56,
+            "url": "2021-05-08_church-sprite.jpg",
+            "width": 100,
+            "height": 56
+        },
+        "chapters": [
+            {
+              "name": "Song of Praise",
+              "who": "Leah Parris–Gray",
+              "info": "#330 Take My Life and Let It Be",
+              "ss": 0,
+              "t": 98
+            },
+            {
+              "name": "Standifer Gap Family Life",
+              "who": "Billy Saunders",
+              "info": "",
+              "ss": 110,
+              "t": 769
+            },
+            {
+              "name": "Song of Praise",
+              "who": "Leah Parris-Gray",
+              "info": "#633 When We All Get to Heaven",
+              "ss": 778,
+              "t": 974
+            },
+            {
+              "name": "Opening Hymn",
+              "who": "Leah Parris-Gray",
+              "info": "#304 Faith of Our Mothers",
+              "ss": 975,
+              "t": 1132
+            },
+            {
+              "name": "Prayer Song",
+              "who": "Leah Parris-Gray",
+              "info": "#290 Turn Your Eyes Upon Jesus",
+              "ss": 1134,
+              "t": 1184
+            },
+            {
+              "name": "Morning Prayer",
+              "who": "Billy Saunders",
+              "info": "",
+              "ss": 1185,
+              "t": 1253
+            },
+            {
+              "name": "Offering",
+              "who": "Rick Halterman",
+              "info": "Disaster & Famine Relief",
+              "ss": 1265,
+              "t": 1645
+            },
+            {
+              "name": "Offertory",
+              "who": "",
+              "info": "",
+              "ss": 1647,
+              "t": 1749
+            },
+            {
+              "name": "Tribute to Our Church Ladies",
+              "who": "Sheryl Stull",
+              "info": "",
+              "ss": 1790,
+              "t": 3697
+            },
+            {
+              "name": "Scripture",
+              "who": "Kevin Brickley",
+              "info": " Proverbs 31:30-31",
+              "ss": 3711,
+              "t": 3775
+            },
+            {
+              "name": "Special Music",
+              "who": "",
+              "info": "",
+              "ss": 3793,
+              "t": 4065
+            },
+            {
+              "name": "Message",
+              "who": "Pastor Sitler",
+              "info": "\"Moms\" in the Gap",
+              "ss": 4070,
+              "t": 5302
+            },
+            {
+              "name": "Closing Hymn",
+              "who": "Leah Parris-Gray",
+              "info": "#655 Happy the Home",
+              "ss": 5303,
+              "t": 5449
+            },
+            {
+              "name": "Benediction Blessing",
+              "who": "Pastor Sitler",
+              "info": "",
+              "ss": 5451,
+              "t": 5561
             }
         ]
     }

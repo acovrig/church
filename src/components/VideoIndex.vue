@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>Video List</h1>
-    <ul>
-      <li v-for="vid in videos" :key="vid.fn">
-        <a :href="'/watch/' + vid.fn">{{ vid.date + ' - ' + vid.name }}</a>
-      </li>
-    </ul>
+    <b-table striped dark hover :items="videos" :fields="fields">
+      <template #cell(type)="data">
+        <a :href="'/watch/' + data.item.fn">{{ data.value | upper }}</a>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -15,13 +15,45 @@ export default {
   props: {
     lst: Array
   },
+  data() {
+    return {
+      fields: ['date', 'type', 'title', 'speaker']
+    }
+  },
   computed: {
     videos: function() {
-      console.log(this.$route.params.program);
+      let lst = this.lst;
+      let ret = [];
       if(this.$route.params.program != null) {
-        return this.lst.filter(vid => vid.kind == this.$route.params.program);
+        lst = this.lst.filter(vid => vid.kind == this.$route.params.program);
       }
-      return this.lst;
+      lst = lst.sort((a, b) => { return new Date(b.date) - new Date(a.date) });
+      lst.forEach((v) => {
+        let chapt = {};
+        if(v.chapters != null) {
+          v.chapters.forEach((c) => {
+            if(c.name.toLowerCase() == 'message')
+              chapt = c;
+          });
+        }
+        ret.push({
+          date: v.date,
+          fn: v.fn,
+          type: v.kind == 'ss' ? 'Sabbath School': v.kind,
+          title: chapt == null ? '' : chapt.info,
+          speaker: chapt == null ? '' : chapt.who
+        });
+      //   if(ret.filter().length > 0)
+      //   let e = ret.pop();
+        // ret.push(e);
+      });
+      return ret;
+    }
+  },
+  filters: {
+    upper(value) {
+      value.toLowerCase().split(' ');
+      return value.charAt(0).toUpperCase() + value.slice(1);
     }
   }
 }
