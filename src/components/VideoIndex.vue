@@ -5,6 +5,9 @@
       <template #cell(type)="data">
         <router-link :to="'/watch/' + data.item.fn">{{ data.value | upper }}</router-link>
       </template>
+      <template #cell(date)="data">
+        {{ data.value | formatDate }}
+      </template>
       <template #cell(speaker)="data">
         <router-link :to="'/?who=' + data.value">{{ data.value }}</router-link>
       </template>
@@ -13,6 +16,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'VideoIndex',
   props: {
@@ -54,9 +59,8 @@ export default {
     }
   },
   filters: {
-    upper(value) {
-      value.toLowerCase().split(' ');
-      return value.charAt(0).toUpperCase() + value.slice(1);
+    formatDate(date) {
+      return moment(date).format('MMMM Do YYYY, h:mm a');
     }
   }
 }

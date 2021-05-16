@@ -14,6 +14,7 @@
             <b-dropdown-item to="/programs/graduation">Graduation</b-dropdown-item>
             <b-dropdown-item to="/programs/other">Other</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item to="/admin">Admin</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -24,9 +25,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <!-- <keep-alive> -->
-      <router-view/>
-    <!-- </keep-alive> -->
+    <router-view/>
   </div>
 </template>
 

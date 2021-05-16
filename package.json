@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "pdfjs-dist": "^2.7.570",
     "register-service-worker": "^1.7.1",
     "v-clipboard": "^2.2.3",
