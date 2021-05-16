@@ -3,7 +3,10 @@
     <h1>Video List</h1>
     <b-table striped dark hover :items="videos" :fields="fields">
       <template #cell(type)="data">
-        <a :href="'/watch/' + data.item.fn">{{ data.value | upper }}</a>
+        <router-link :to="'/watch/' + data.item.fn">{{ data.value | upper }}</router-link>
+      </template>
+      <template #cell(speaker)="data">
+        <router-link :to="'/?who=' + data.value">{{ data.value }}</router-link>
       </template>
     </b-table>
   </div>

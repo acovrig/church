@@ -63,7 +63,6 @@ export default {
       sprite.url = '/videos/' + sprite.url;
     }
     this.player = videojs(this.$refs.videoPlayer, this.opts, function onPlayerReady() {
-      console.log('player ready', this);
       window.player = this;
       if(sprite !== null)
         this.spriteThumbnails(sprite);

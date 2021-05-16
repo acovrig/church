@@ -16,6 +16,9 @@
                   {{ data.value }}
                 </template>
               </template>
+              <template #cell(who)="data">
+                <a :href="'/?who=' + data.value">{{ data.value }}</a>
+              </template>
             </b-table>
             </b-card-text>
           </b-tab>

@@ -24,7 +24,9 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view/>
+    <!-- <keep-alive> -->
+      <router-view/>
+    <!-- </keep-alive> -->
   </div>
 </template>
 
