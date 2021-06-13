@@ -2,53 +2,102 @@
   <div>
     <h1>Bulletin</h1>
     <div id="bulletin">
-      <b-card no-body>
-        <b-tabs card>
-          <b-tab title="Table" v-if="video.chapters.length > 0" active>
-            <b-card-text>
-            <b-table striped dark hover :items="video.chapters" :fields="fields">
-              <template #cell(name)="data">
-                <a href="#" v-on:click="play(data.index)">{{ data.value }}</a>
+      <v-card>
+        <v-tabs
+          v-model="tab"
+          centered
+          icons-and-text
+          dark>
+          <v-tabs-slider />
+          <v-tab>
+            Table
+            <v-icon>mdi-table</v-icon>
+          </v-tab>
+          <v-tab>
+            PDF
+            <v-icon>mdi-book</v-icon>
+          </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="tab">
+          <v-tab-item>
+            <v-simple-table dark>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Info</th>
+                    <th class="text-center">Who</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(chapt, index) in video.chapters"
+                    :key="`${chapt.name}${chapt.info}${chapt.who}`">
+                    <td><a href="#" v-on:click="play(index)">{{ chapt.name }}</a></td>
+                    <td>
+                      <v-dialog
+                        v-if="chapt.name != null && chapt.name.trim().toLowerCase() == 'scripture'"
+                        v-model="scriptureDialog"
+                        width="500">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            text
+                            plain
+                            tag="a"
+                            style="text-transform: none;"
+                            color="primary"
+                            v-bind="attrs"
+                            v-on="on">
+                            {{ chapt.info }}
+                          </v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-card-title class="text-h5 grey lighten-2">
+                            {{ chapt.info }}
+                          </v-card-title>
+
+                          <v-card-text>
+                            <p v-for="verse in getScripture(chapt.info)" :key="verse.num">
+                              {{verse.num}} - {{ verse.text }}
+                            </p>
+                          </v-card-text>
+                          <v-divider></v-divider>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="primary"
+                              text
+                              @click="scriptureDialog = false">
+                              Close
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                      <template v-else>
+                        {{ chapt.info }}
+                      </template>
+                    </td>
+                    <td><a :href="'/?who=' + chapt.who">{{ chapt.who }}</a></td>
+                  </tr>
+                </tbody>
               </template>
-              <template #cell()="data">
-                <a v-if="data.item.name != null && data.item.name.toLowerCase() == 'scripture' && data.field.key == 'info' && video.scripture != null" href="#" v-b-modal.scripture>{{ data.value }}</a>
-                <template v-else>
-                  {{ data.value }}
-                </template>
-              </template>
-              <template #cell(who)="data">
-                <a :href="'/?who=' + data.value">{{ data.value }}</a>
-              </template>
-            </b-table>
-            </b-card-text>
-          </b-tab>
-          <b-tab title="PDF" v-if="video.pdf != null">
-            <b-card-text>
-              <div id="pdfOut">
-                <div id="pdfIn">
-                  <iframe :src="'/pdf/' +  video.pdf" class="pdf-iframe"></iframe>
-                  <!-- <iframe :src="'/' + video.pdf" class="pdf-iframe"></iframe> -->
-                </div>
+            </v-simple-table>
+          </v-tab-item>
+          <v-tab-item>
+            <div id="pdfOut">
+              <div id="pdfIn">
+                <iframe :src="'/pdf/' +  video.pdf" class="pdf-iframe"></iframe>
               </div>
-            </b-card-text>
-          </b-tab>
-          <template v-if="video.pdf != null" #tabs-end>
-            <!-- <b-nav-item href="#" role="presentation" @click="() => {}">Another tab</b-nav-item> -->
-            <li role="presentation" class="nav-item align-self-center"><a :href="'/pdf/' +  video.pdf" download>Download</a></li>
-          </template>
-        </b-tabs>
-      </b-card>
+            </div>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
     </div>
-    <b-modal id="scripture" title="Scripture" hide-footer>
-      <p class="my-4" v-html="scripture"></p>
-    </b-modal>
   </div>
 </template>
 
 <script>
-// import axios from 'axios';
-// import pdfjs from 'pdfjs-dist/lib/pdfjs'
-
 export default {
   name: 'Bulletin',
   props: {
@@ -56,30 +105,30 @@ export default {
   },
   data() {
     return {
+      tab: 0,
       fields: ['name', 'info', 'who'],
-      scripture: 'Loading Scripture'
+      scripture: [{num: 0, text: 'Loading Scripture'}],
+      scriptureDialog: false,
     }
   },
   methods: {
     play: function(i) {
       window.player.currentTime(this.video.chapters[i].ss)
-    }
+    },
   },
   mounted() {
-    // pdfjs.getdocument()
-    this.$root.$on('bv::modal::show', () => {
-      this.scripture = this.video.scripture.replaceAll('\n', '<br><br>\n');
-      // axios.get('https://getbible.net/json?passage=1Jn3:16').then(res => {
-      //   console.log(res);
-      //   this.scripture = 'asdf';
-      // });
-    })
+    // this.$root.$on('bv::modal::show', () => {
+    //   this.scripture = this.video.scripture.replaceAll('\n', '<br><br>\n');
+    //   // axios.get('https://getbible.net/json?passage=1Jn3:16').then(res => {
+    //   //   console.log(res);
+    //   //   this.scripture = 'asdf';
+    //   // });
+    // })
   },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 div#bulletin {
   max-width: 1750px;
   margin: 0px auto;

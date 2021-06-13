@@ -8,11 +8,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    events: []
+    events: [],
   },
   getters: {
-    getVideo: (state) => (fn) => {
-      let data = state.events.filter(vid => vid.fn == fn);
+    getVideo: (state) => (id) => {
+      let data = state.events.filter(vid => vid.id == id);
       if(data.length > 0)
         return data[0];
       return {};
@@ -26,9 +26,45 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    /* eslint-disable-next-line */
     init({ commit }) {
-      axios.get('https://church.thecovrigs.net/api/events').then(res => {
-        commit('SET_EVENTS', res.data);
+      const data = {
+        'query': `
+          query MyQuery($_eq: uuid = "asdf") {
+            events(order_by: {date: desc}) {
+              id
+              date
+              fn
+              kind
+              name
+              pdf
+              sub
+              scripture: chapters(where: {name: {_eq: "Scripture"}}, limit: 1) {
+                info
+              }
+              chapters {
+                name
+                info
+                who
+                ss
+                t
+              }
+              sprites {
+                url
+                interval
+                width
+                height
+              }
+            }
+          }        
+        `,
+        'variables': {},
+        'operationName': 'MyQuery',
+      };
+      axios.post('https://devgraph.thecovrigs.net/v1/graphql', data).then(res => {
+        const events = res?.data?.data?.events || [];
+        events.map((e) => e.scripture = e.scripture[0]?.info);
+        commit('SET_EVENTS', events);
       }).catch(err => {
         console.error(err);
       });

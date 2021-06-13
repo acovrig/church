@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <b-container>
-      <VideoIndex :lst="videos" />
-    </b-container>
+    <VideoIndex :lst="videos" />
   </div>
 </template>
 

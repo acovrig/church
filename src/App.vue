@@ -1,35 +1,99 @@
 <template>
-  <div id="app" class="bg-dark text-light">
-    <b-navbar toggleable="lg" type="dark" variant="secondary">
-      <b-navbar-brand to="/">Home</b-navbar-brand>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-btn @click="homeClick()" text>
+          SGSDA Church
+        </v-btn>
+        <v-btn to="/about" text>
+          About
+        </v-btn>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              text
+              v-bind="attrs"
+              v-on="on"
+            >
+              Programs
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in programs"
+              :key="index"
+              :to="item.path">
+              <v-list-item-title>
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <v-spacer></v-spacer>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/about">About</b-nav-item>
-          <b-nav-item-dropdown text="Programs" right>
-            <b-dropdown-item to="/programs/church">Church</b-dropdown-item>
-            <b-dropdown-item to="/programs/ss">Sabbath School</b-dropdown-item>
-            <b-dropdown-item to="/programs/graduation">Graduation</b-dropdown-item>
-            <b-dropdown-item to="/programs/other">Other</b-dropdown-item>
-          </b-nav-item-dropdown>
-          <b-nav-item to="/admin">Admin</b-nav-item>
-        </b-navbar-nav>
+      <div class="d-flex mt-8">
+        <v-text-field
+          label="Search"
+        />
+        <v-btn v-if="!showAdmin && clickedHome > 0" text>
+          {{ 'Admin'.substring(0, clickedHome) }}
+        </v-btn>
+        <v-btn v-if="showAdmin" to="/admin" text>
+          {{ 'Admin'.substring(clickedHome) }}
+        </v-btn>
+      </div>
+    </v-app-bar>
 
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          </b-nav-form>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-    <router-view/>
-  </div>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
+<script>
+export default {
+  name: 'App',
+  data: () => ({
+    programs: [
+      { title: 'Church', path: '/programs/church' },
+      { title: 'Sabbath School', path: '/programs/sabbath_school' },
+      { title: 'Graduation', path: '/programs/graduation' },
+      { title: 'Other', path: '/programs/other' },
+    ],
+    clickedHome: 0,
+    clickTimer: null,
+    showAdmin: false,
+  }),
+  methods: {
+    homeClick() {
+      if (this.$route.path === '/') {
+        clearInterval(this.clickTimer);
+        this.clickTimer = setInterval(() => {
+          this.clickedHome -= 1;
+          if (this.clickedHome < 1) {
+            this.clickedHome = 0;
+            clearInterval(this.clickTimer);
+          }
+        }, 1000);
+        this.clickedHome += 1;
+        if (this.clickedHome > 4) {
+          this.clickedHome = 0;
+          this.showAdmin = !this.showAdmin;
+        }
+      } else {
+        this.$router.push('/')
+      }
+    },
+  },
+};
+</script>
+<style lang="scss">
 html, body, #app {
   min-height: 100vh;
 }

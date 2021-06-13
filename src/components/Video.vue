@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ video.date }} - {{ video.name }}</h1>
+    <h1>{{ video.name }} {{ video.date | humanDate }}</h1>
     <div id="videoOut">
       <div id="videoIn">
         <video ref="videoPlayer" class="video-js">
