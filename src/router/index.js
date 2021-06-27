@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Watch from '../views/Watch.vue'
-import Admin from '../views/Admin.vue'
+import VideoEdit from '../views/VideoEdit.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -18,14 +19,22 @@ const routes = [
     component: Watch
   },
   {
+    path: '/watch/:id/edit',
+    name: 'EditVideo',
+    component: VideoEdit,
+    beforeEnter: (to, _from, next) => {
+      if (!store.getters.admin) {
+        store.commit('notify', [{msg: 'Not Logged In', type: 'error'}]);
+        next({name: 'Watch', params: to.params});
+      } else {
+        next();
+      }
+    },
+  },
+  {
     path: '/programs/:program',
     name: 'Programs',
     component: Home
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin
   },
   {
     path: '/about',
@@ -41,6 +50,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 export default router

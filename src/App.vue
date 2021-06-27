@@ -41,11 +41,14 @@
         <v-text-field
           label="Search"
         />
-        <v-btn v-if="!showAdmin && clickedHome > 0" text>
-          {{ 'Admin'.substring(0, clickedHome) }}
+        <v-btn
+          v-if="!admin && showAdmin"
+          @click="setAdmin(!admin)"
+          text>
+          log in
         </v-btn>
-        <v-btn v-if="showAdmin" to="/admin" text>
-          {{ 'Admin'.substring(clickedHome) }}
+        <v-btn v-if="admin" @click="setAdmin(!admin)" text>
+          log out
         </v-btn>
       </div>
     </v-app-bar>
@@ -70,9 +73,13 @@ export default {
     clickTimer: null,
     showAdmin: false,
   }),
+  computed: {
+    admin() { return this.$store.getters.admin },
+  },
   methods: {
     homeClick() {
       if (this.$route.path === '/') {
+        // console.log(Math.ceil((this.clickedHome*5)/7), (this.clickedHome*5)/7);
         clearInterval(this.clickTimer);
         this.clickTimer = setInterval(() => {
           this.clickedHome -= 1;
@@ -82,14 +89,27 @@ export default {
           }
         }, 1000);
         this.clickedHome += 1;
-        if (this.clickedHome > 4) {
+        if (this.clickedHome > 4 && !this.admin) {
           this.clickedHome = 0;
           this.showAdmin = !this.showAdmin;
+          if (!this.showAdmin) this.setAdmin(false);
         }
       } else {
         this.$router.push('/')
       }
     },
+    setAdmin(val) {
+      if (val) {
+        const key = prompt('key');
+        if (key !== '' && key !== null && key !== undefined) {
+          this.$store.commit('key', key);
+        }
+      } else {
+        this.$store.commit('key', null);
+        if (this.$route.name == 'EditVideo') this.$router.push({ name: 'Watch', params: this.$router.params });
+      }
+      this.showAdmin = val;
+    }
   },
 };
 </script>

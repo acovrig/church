@@ -20,7 +20,64 @@
         </v-tabs>
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <v-simple-table dark>
+            <v-form v-if="admin">
+            <v-data-table
+              :headers="headers"
+              :items="video.chapters"
+              item-key="id"
+              hide-default-footer
+              disable-pagination
+              dark>
+              <template v-slot:[`item.name`]="{ item }">
+                <v-text-field v-model="item.name" />
+              </template>
+              <template v-slot:[`item.info`]="{ item }">
+                <v-text-field v-model="item.info" />
+              </template>
+              <template v-slot:[`item.who`]="{ item }">
+                <v-text-field v-model="item.who" />
+              </template>
+              <template v-slot:[`item.ss`]="{ item }">
+                <v-text-field v-model="item.ss" required type="number" min="0" />
+              </template>
+              <template v-slot:[`item.t`]="{ item }">
+                <v-text-field v-model="item.t" required type="number" min="0" />
+              </template>
+              <template v-slot:[`item.actions`]="{ index }">
+                <v-btn
+                  dark
+                  color="success"
+                  @click="addItem(index)"
+                  icon>
+                  <v-icon>mdi-table-row-plus-before</v-icon>
+                </v-btn>
+                <v-btn
+                  dark
+                  :disabled="index === 0"
+                  color="primary"
+                  @click="moveItm(index, index - 1)"
+                  icon>
+                  <v-icon>mdi-arrow-up-bold</v-icon>
+                </v-btn>
+                <v-btn
+                  dark
+                  :disabled="index === video.chapters.length - 1"
+                  color="primary"
+                  @click="moveItm(index, index + 1)"
+                  icon>
+                  <v-icon>mdi-arrow-down-bold</v-icon>
+                </v-btn>
+                <v-btn
+                  dark
+                  color="error"
+                  @click="delItem(index)"
+                  icon>
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </template>
+            </v-data-table>
+            </v-form>
+            <v-simple-table v-else dark>
               <template v-slot:default>
                 <thead>
                   <tr>
@@ -98,6 +155,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Bulletin',
   props: {
@@ -106,24 +164,38 @@ export default {
   data() {
     return {
       tab: 0,
+      headers: [
+        { text: 'Name', value: 'name', align: 'center' },
+        { text: 'Info', value: 'info', align: 'center' },
+        { text: 'Who', value: 'who', align: 'center' },
+        { text: 'Start Seconds', value: 'ss', align: 'center', width: '1%' },
+        { text: 'Total Seconds', value: 't', align: 'center', width: '1%' },
+        { text: 'Actions', value: 'actions', align: 'center', width: '15%' },
+      ],
       fields: ['name', 'info', 'who'],
       scripture: [{num: 0, text: 'Loading Scripture'}],
       scriptureDialog: false,
     }
   },
+  computed: {
+    admin() { return this.$store.getters.admin; },
+  },
   methods: {
     play: function(i) {
       window.player.currentTime(this.video.chapters[i].ss)
     },
-  },
-  mounted() {
-    // this.$root.$on('bv::modal::show', () => {
-    //   this.scripture = this.video.scripture.replaceAll('\n', '<br><br>\n');
-    //   // axios.get('https://getbible.net/json?passage=1Jn3:16').then(res => {
-    //   //   console.log(res);
-    //   //   this.scripture = 'asdf';
-    //   // });
-    // })
+    addItem(i) {
+      this.video.chapters.splice(i, 0, {ss: 0, t: 0});
+    },
+    delItem(i) {
+      this.video.chapters.splice(i, 1);
+    },
+    moveItm(s, d) {
+      const src = {...{order_num: d}, ...this.video.chapters[s]};
+      const dst = {...{order_num: s}, ...this.video.chapters[d]};
+      this.video.chapters.splice(d, 1, src);
+      this.video.chapters.splice(s, 1, dst);
+    },
   },
 }
 </script>

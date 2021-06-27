@@ -72,6 +72,13 @@
                   <router-link :to="`/watch/${item.id}`">
                     {{ item.title }}
                   </router-link>
+                  <v-btn
+                    v-if="admin"
+                    :to="`/watch/${item.id}/edit`"
+                    style="text-decoration: none;"
+                    icon>
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
                 </h4>
               </v-card-title>
                 <v-subheader style="height: 1em; margin-top: -1em;">
@@ -200,7 +207,11 @@
 export default {
   name: 'VideoIndex',
   props: {
-    lst: Array
+    lst: Array,
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

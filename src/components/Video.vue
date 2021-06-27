@@ -3,8 +3,8 @@
     <h1>{{ video.name }} {{ video.date | humanDate }}</h1>
     <div id="videoOut">
       <div id="videoIn">
-        <video ref="videoPlayer" class="video-js">
-          <track kind="captions" :src="'/videos/' + video.sub" srclang="en" label="English" default>
+        <video v-if="video.fn" ref="videoPlayer" class="video-js">
+          <track v-if="video.sub" kind="captions" :src="'/videos/' + video.sub" srclang="en" label="English" default>
           <track kind="chapters" :src="chapters()" srclang="en">
         </video>
       </div>

@@ -11,12 +11,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import moment from 'moment';
 import vuetify from './plugins/vuetify';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 import _ from 'lodash';
 import bible from '@/nkjv.bible.json';
 
 Vue.use(VueAxios, axios);
 Vue.use(Clipboard);
+Vue.use(Toast, { transition: 'Vue-Toastification__bounce', maxToasts: 10, newestOnTop: true });
 
 axios.interceptors.request.use((config) => {
   config.headers.Accepts = 'application/json';

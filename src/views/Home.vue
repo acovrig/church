@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <VideoIndex :lst="videos" />
+    <VideoIndex :lst="videos" :admin="isAdmin" />
   </div>
 </template>
 
@@ -19,7 +19,10 @@ export default {
       videos: [],
     }
   },
-  computed: mapState(['events']),
+  computed: {
+    ...mapState(['events']),
+    isAdmin() { return this.$store.getters.admin; },
+  },
   watch: {
     events(newVal) {
       this.videos = newVal;
