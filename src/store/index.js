@@ -13,7 +13,7 @@ export default new Vuex.Store({
     events: [],
     admin: false,
     key: null,
-    notify: null,
+    notify: [],
   },
   getters: {
     getVideo: (state) => (id) => {
@@ -76,7 +76,7 @@ export default new Vuex.Store({
         'variables': {},
         'operationName': 'MyQuery',
       };
-      axios.post('https://devgraph.thecovrigs.net/v1/graphql', data).then(res => {
+      axios.post('https://perfect-fly-55.hasura.app/v1/graphql', data).then(res => {
         const events = res?.data?.data?.events || [];
         events.map((e) => e.scripture = e.scripture[0]?.info);
         commit('SET_EVENTS', events);
@@ -166,7 +166,7 @@ export default new Vuex.Store({
         'variables': {},
         'operationName': 'MyMutation',
       };
-      axios.post('https://devgraph.thecovrigs.net/v1/graphql', data, {headers: {'x-hasura-admin-secret': this.state.key}}).then(res => {
+      axios.post('https://perfect-fly-55.hasura.app/v1/graphql', data, {headers: {'x-hasura-admin-secret': this.state.key}}).then(res => {
         if (res.data.errors) {
           console.error(res.data.errors);
           // commit('notify', [...this.getters.notify, ...[{msg: 'Something went wrong saving the video, is the key correct', type: 'error' }]]);

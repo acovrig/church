@@ -43,7 +43,7 @@ export default {
           type: notify.type,
         });
       });
-      this.$store.commit('notify', null);
+      this.$store.commit('notify', []);
     }
   },
 }
