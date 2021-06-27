@@ -89,6 +89,7 @@
                 <v-btn
                   :to="`/watch/${item.id}`"
                   style="text-decoration: none;"
+                  class="mx-0 px-0"
                   text>
                   <v-icon class="mx-2">mdi-eye</v-icon>
                   Watch
@@ -98,6 +99,7 @@
                   :href="`/pdf/${item.pdf}`"
                   target="_BLANK"
                   style="text-decoration: none;"
+                  class="mx-0 px-0"
                   text>
                   <v-icon class="mx-2">mdi-download</v-icon>
                   Bulletin
@@ -110,9 +112,11 @@
                     <v-btn
                       v-bind="attrs"
                       v-on="on"
+                      class="mx-0 px-0"
                       text>
                       <v-icon class="mx-2">mdi-open-in-app</v-icon>
-                      {{ item.scripture }}
+                      Scripture
+                      <!-- {{ item.scripture }} -->
                     </v-btn>
                   </template>
 
@@ -241,7 +245,7 @@ export default {
     videos: function() {
       let lst = this.lst;
       let ret = [];
-      if(this.$route.params.program != null) {
+      if(this.$route.params.program != null && this.$route.params.program !== 'all') {
         lst = this.lst.filter(vid => vid.kind == this.$route.params.program);
       }
       lst = lst.sort((a, b) => { return new Date(b.date) - new Date(a.date) });

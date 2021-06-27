@@ -42,7 +42,7 @@ export default new Vuex.Store({
     init({ commit }) {
       const data = {
         'query': `
-          query MyQuery($_eq: uuid = "asdf") {
+          query MyQuery {
             events(order_by: {date: desc}) {
               id
               date
